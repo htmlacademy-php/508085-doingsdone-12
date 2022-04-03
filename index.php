@@ -1,6 +1,46 @@
 <?php
 // показывать или нет выполненные задачи
 $show_complete_tasks = rand(0, 1);
+$mas = ["Входящие", "Учеба", "Работа", "Домашние дела", "Авто"]; 
+$mas_many = [
+    [
+        "Задача" => "Собеседование в IT компании",
+        "Дата выполнения" => "01.12.2019", 
+        "Категория" => "Работа",
+        "Выполнен" => false
+    ],
+[
+    "Задача" => "Выполнить тестовое задание",
+    "Дата выполнения" => "25.12.2019",
+    "Категория" => "Работа",
+    "Выполнен" => false
+],
+[
+    "Задача" => "Сделать задание первого раздела",
+    "Дата выполнения" => "21.12.2019",
+    "Категория" => "Учеба",
+    "Выполнен" => true
+],
+[
+    "Задача" => "Встреча с другом",
+    "Дата выполнения" => "22.12.2019",
+    "Категория" => "Входящие",
+    "Выполнен" => false
+],
+[
+    "Задача" => "Купить корм для кота",
+    "Дата выполнения" => null,
+    "Категория" => "Домашние дела",
+    "Выполнен" => false
+],
+[
+    "Задача" => "Заказать пиццу",
+    "Дата выполнения" => null,
+    "Категория" => "Домашние дела",
+    "Выполнен" => false 
+],
+];
+
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -14,6 +54,7 @@ $show_complete_tasks = rand(0, 1);
 </head>
 
 <body>
+  
 <h1 class="visually-hidden">Дела в порядке</h1>
 
 <div class="page-wrapper">
@@ -39,11 +80,18 @@ $show_complete_tasks = rand(0, 1);
         <div class="content">
             <section class="content__side">
                 <h2 class="content__side-heading">Проекты</h2>
-
                 <nav class="main-navigation">
                     <ul class="main-navigation__list">
-                        <li class="main-navigation__list-item">
-                            <a class="main-navigation__list-item-link" href="#">Название проекта</a>
+
+    
+
+                        <?php $index = 0; ?> 
+                        <?php $num = count($mas); ?> 
+                        <?php while($index < $num): ?>
+                            <li class="main-navigation__list-item">
+                            <a class="main-navigation__list-item-link" href="#"><?= $mas[$index] ?></a>
+                            <?php $index++; ?>
+                        <?php endwhile; ?>   
                             <span class="main-navigation__list-item-count">0</span>
                         </li>
                     </ul>
@@ -79,11 +127,21 @@ $show_complete_tasks = rand(0, 1);
                 </div>
 
                 <table class="tasks">
-                    <tr class="tasks__item task">
+                    <?php $ind_mas_many = 0; ?>
+                    <?php $num_mas_many = count($mas_many) ;?> 
+                    <?php while($ind_mas_many < $num_mas_many): ?>
+
+                     <?php if ($mas_many[$ind_mas_many]["Выполнен"] == true && $show_complete_tasks == 1): ?>  
+                    <tr class="tasks__item task--completed">
+                        <?php elseif($mas_many[$ind_mas_many]["Выполнен"] != true && $show_complete_tasks == 1): ?>
+                            <tr class="tasks__item task"> 
+                     <?php elseif($mas_many[$ind_mas_many]["Выполнен"] != true && $show_complete_tasks == 0): ?> 
+                            <tr class="tasks__item task">          
+                    <?php endif; ?>
                         <td class="task__select">
                             <label class="checkbox task__checkbox">
                                 <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
-                                <span class="checkbox__text">Сделать главную страницу Дела в порядке</span>
+                                <span class="checkbox__text"><?= $mas_many[$ind_mas_many]["Задача"] ?></span>
                             </label>
                         </td>
 
@@ -92,7 +150,11 @@ $show_complete_tasks = rand(0, 1);
                         </td>
 
                         <td class="task__date"></td>
+
                     </tr>
+                    
+                    <?php $ind_mas_many++ ?>
+                    <?php endwhile; ?>
                     <?php if ($show_complete_tasks ==1): ?>
                         <tr class="tasks__item task task--completed">
   <td class="task__select">
