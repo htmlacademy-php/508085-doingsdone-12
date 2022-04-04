@@ -134,27 +134,53 @@ $mas_many = [
 
  
                      <?php if($mas_many[$ind_mas_many]["Выполнен"] != true && $show_complete_tasks == 0): ?> 
-                        <tr class="tasks__item task"> 
-
-                        
-                        <?php elseif ($mas_many[$ind_mas_many]["Выполнен"] == true && $show_complete_tasks == 1): ?>  
-                    <tr class="tasks__item task--completed">
-                            <!--<tr class="tasks__item task">  -->   
-                    <?php else: ?>    
-                    <tr class="tasks__item task">            
-                    <?php endif; ?>
+                        <tr class="tasks__item task">
                         <td class="task__select">
                             <label class="checkbox task__checkbox">
                                 <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
                                 <span class="checkbox__text"><?= $mas_many[$ind_mas_many]["Задача"] ?></span>
                             </label>
                         </td>
+                        <td class="task__date"><?= $mas_many[$ind_mas_many]["Дата выполнения"] ?></td>
 
                         <td class="task__file">
                             <a class="download-link" href="#">Home.psd</a>
                         </td>
 
+                        <td class="task__date"></td> 
+
+                        
+                        <?php elseif ($mas_many[$ind_mas_many]["Выполнен"] == true && $show_complete_tasks == 1): ?>  
+                    <tr class="tasks__item task--completed">
+                    <td class="task__select">
+                            <label class="checkbox task__checkbox">
+                                <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
+                                <span class="checkbox__text"><?= $mas_many[$ind_mas_many]["Задача"] ?></span>
+                            </label>
+                        </td>
+                        <td class="task__date"><?= $mas_many[$ind_mas_many]["Дата выполнения"] ?></td>
+
+                        
+
                         <td class="task__date"></td>
+                            <!--<tr class="tasks__item task">  -->   
+                    <?php else: ?>    
+                    <tr class="tasks__item task">
+                    <td class="task__select">
+                            <label class="checkbox task__checkbox">
+                                <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
+                                <span class="checkbox__text"><?= $mas_many[$ind_mas_many]["Задача"] ?></span>
+                            </label>
+                        </td>
+                        <td class="task__date"><?= $mas_many[$ind_mas_many]["Дата выполнения"] ?></td>
+
+                        <td class="task__file">
+                            <a class="download-link" href="#">Home.psd</a>
+                        </td>
+
+                        <td class="task__date"></td>            
+                    <?php endif; ?>
+
 
                     </tr>
                     
