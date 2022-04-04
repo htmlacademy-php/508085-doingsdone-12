@@ -131,12 +131,17 @@ $mas_many = [
                     <?php $num_mas_many = count($mas_many) ;?> 
                     <?php while($ind_mas_many < $num_mas_many): ?>
 
-                     <?php if ($mas_many[$ind_mas_many]["Выполнен"] == true && $show_complete_tasks == 1): ?>  
+
+ 
+                     <?php if($mas_many[$ind_mas_many]["Выполнен"] != true && $show_complete_tasks == 0): ?> 
+                        <tr class="tasks__item task"> 
+
+                        
+                        <?php elseif ($mas_many[$ind_mas_many]["Выполнен"] == true && $show_complete_tasks == 1): ?>  
                     <tr class="tasks__item task--completed">
-                        <?php elseif($mas_many[$ind_mas_many]["Выполнен"] != true && $show_complete_tasks == 1): ?>
-                            <tr class="tasks__item task"> 
-                     <?php elseif($mas_many[$ind_mas_many]["Выполнен"] != true && $show_complete_tasks == 0): ?> 
-                            <tr class="tasks__item task">          
+                            <!--<tr class="tasks__item task">  -->   
+                    <?php else: ?>    
+                    <tr class="tasks__item task">            
                     <?php endif; ?>
                         <td class="task__select">
                             <label class="checkbox task__checkbox">
