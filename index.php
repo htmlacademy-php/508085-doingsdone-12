@@ -14,7 +14,8 @@ $mas_many = [
     "Дата выполнения" => "25.12.2019",
     "Категория" => "Работа",
     "Выполнен" => false
-],
+], 
+
 [
     "Задача" => "Сделать задание первого раздела",
     "Дата выполнения" => "21.12.2019",
@@ -60,7 +61,7 @@ $mas_many = [
 <div class="page-wrapper">
     <div class="container container--with-sidebar">
         <header class="main-header">
-            <a href="/">
+            <a href="/"> 
                 <img src="img/logo.png" width="153" height="42" alt="Логотип Дела в порядке">
             </a>
 
