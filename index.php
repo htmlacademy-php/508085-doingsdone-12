@@ -182,7 +182,6 @@ $mas_many = [
                     <?php endif; ?>
 
 
-                    
                     </tr>
                     
                     <?php $ind_mas_many++ ?>
