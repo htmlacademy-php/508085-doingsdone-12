@@ -12,40 +12,40 @@ $projects = [
 
 $tasks = [
     [
-        "Задача" => "Собеседование в IT компании",
-        "Дата выполнения" => "01.12.2019",
-        "Категория" => "Работа",
-        "Выполнен" => false
+        "Task_name" => "Собеседование в IT компании",
+        "Deadline" => "01.12.2019",
+        "Project" => "Работа",
+        "Ready" => false
     ],
     [
-        "Задача" => "Выполнить тестовое задание",
-        "Дата выполнения" => "25.12.2019",
-        "Категория" => "Работа",
-        "Выполнен" => false
+        "Task_name" => "Выполнить тестовое задание",
+        "Deadline" => "25.12.2019",
+        "Project" => "Работа",
+        "Ready" => false
     ],
     [
-        "Задача" => "Сделать задание первого раздела",
-        "Дата выполнения" => "21.12.2019",
-        "Категория" => "Учеба",
-        "Выполнен" => true
+        "Task_name" => "Сделать задание первого раздела",
+        "Deadline" => "21.12.2019",
+        "Project" => "Учеба",
+        "Ready" => true
     ],
     [
-        "Задача" => "Встреча с другом",
-        "Дата выполнения" => "22.12.2019",
-        "Категория" => "Входящие",
-        "Выполнен" => false
+        "Task_name" => "Встреча с другом",
+        "Deadline" => "22.12.2019",
+        "Project" => "Входящие",
+        "Ready" => false
     ],
     [
-        "Задача" => "Купить корм для кота",
-        "Дата выполнения" => null,
-        "Категория" => "Домашние дела",
-        "Выполнен" => false
+        "Task_name" => "Купить корм для кота",
+        "Deadline" => null,
+        "Project" => "Домашние дела",
+        "Ready" => false
     ],
     [
-        "Задача" => "Заказать пиццу",
-        "Дата выполнения" => null,
-        "Категория" => "Домашние дела",
-        "Выполнен" => false
+        "Task_name" => "Заказать пиццу",
+        "Deadline" => null,
+        "Project" => "Домашние дела",
+        "Ready" => false
     ],
 ];
 
@@ -91,12 +91,14 @@ $tasks = [
                     <h2 class="content__side-heading">Проекты</h2>
 
                     <nav class="main-navigation">
+                        <?php foreach ($projects as $val): ?>
                         <ul class="main-navigation__list">
                             <li class="main-navigation__list-item">
-                                <a class="main-navigation__list-item-link" href="#">Название проекта</a>
+                                <a class="main-navigation__list-item-link" href="#"><?= $val; ?></a>
                                 <span class="main-navigation__list-item-count">0</span>
                             </li>
                         </ul>
+                        <?php endforeach; ?>
                     </nav>
 
                     <a class="button button--transparent button--plus content__side-button" href="pages/form-project.html" target="project_add">Добавить проект</a>
@@ -142,7 +144,7 @@ $tasks = [
 
                             <td class="task__date"></td>
                         </tr>
-                        <?php if ($show_complete_tasks == 1) : ?>
+                        <?php if ($show_complete_tasks == 1): ?>
                             <tr class="tasks__item task task--completed">
                                 <td class="task__select">
                                     <label class="checkbox task__checkbox">
