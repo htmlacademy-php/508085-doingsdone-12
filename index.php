@@ -145,19 +145,11 @@ $tasks = [
                             <td class="task__date"></td>
                         </tr>
                         <?php foreach ($tasks as $one_task): 
-                         if ($show_complete_tasks == 0 and $one_task["ready"] == true) continue; 
-                         if ($one_task["ready"]): ?>
-                        <tr class="tasks__item task--completed">
-                         <?php else: ?>
-                        <tr class="tasks__item task"> 
-                         <?php endif; ?>   
+                         if ($show_complete_tasks == 0 and $one_task["ready"] == true) continue; ?>
+                        <tr class="tasks__item task<?php if ($one_task["ready"]) echo '--completed'; ?>"> 
                             <td class="task__select">
                                 <label class="checkbox task__checkbox">
-                                    <?php if ($one_task["ready"]): ?>
-                                    <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1" checked>
-                                    <?php else: ?>
-                                    <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1" >
-                                    <?php endif; ?> 
+                                    <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1" <?php if ($one_task["ready"]) echo ' checked';?>>
                                     <span class="checkbox__text"><?= $one_task["task_name"]; ?></span>
                                 </label>
                             </td>
