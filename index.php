@@ -12,40 +12,40 @@ $projects = [
 
 $tasks = [
     [
-        "Task_name" => "Собеседование в IT компании",
-        "Deadline" => "01.12.2019",
-        "Project" => "Работа",
-        "Ready" => false
+        "task_name" => "Собеседование в IT компании",
+        "deadline" => "01.12.2019",
+        "project" => "Работа",
+        "ready" => false
     ],
     [
-        "Task_name" => "Выполнить тестовое задание",
-        "Deadline" => "25.12.2019",
-        "Project" => "Работа",
-        "Ready" => false
+        "task_name" => "Выполнить тестовое задание",
+        "deadline" => "25.12.2019",
+        "project" => "Работа",
+        "ready" => false
     ],
     [
-        "Task_name" => "Сделать задание первого раздела",
-        "Deadline" => "21.12.2019",
-        "Project" => "Учеба",
-        "Ready" => true
+        "task_name" => "Сделать задание первого раздела",
+        "deadline" => "21.12.2019",
+        "project" => "Учеба",
+        "ready" => true
     ],
     [
-        "Task_name" => "Встреча с другом",
-        "Deadline" => "22.12.2019",
-        "Project" => "Входящие",
-        "Ready" => false
+        "task_name" => "Встреча с другом",
+        "deadline" => "22.12.2019",
+        "project" => "Входящие",
+        "ready" => false
     ],
     [
-        "Task_name" => "Купить корм для кота",
-        "Deadline" => null,
-        "Project" => "Домашние дела",
-        "Ready" => false
+        "task_name" => "Купить корм для кота",
+        "deadline" => null,
+        "project" => "Домашние дела",
+        "ready" => false
     ],
     [
-        "Task_name" => "Заказать пиццу",
-        "Deadline" => null,
-        "Project" => "Домашние дела",
-        "Ready" => false
+        "task_name" => "Заказать пиццу",
+        "deadline" => null,
+        "project" => "Домашние дела",
+        "ready" => false
     ],
 ];
 
@@ -145,13 +145,20 @@ $tasks = [
                             <td class="task__date"></td>
                         </tr>
                         <?php foreach ($tasks as $one_task): 
-                         if ($show_complete_tasks == 0  and $one_task["Ready"] == True) continue; 
-                         if ($one_task["Ready"]): ?>
+                         if ($show_complete_tasks == 0 and $one_task["ready"] == true) continue; 
+                         if ($one_task["ready"]): ?>
                         <tr class="tasks__item task--completed">
+                         <?php else: ?>
+                        <tr class="tasks__item task"> 
+                         <?php endif; ?>   
                             <td class="task__select">
                                 <label class="checkbox task__checkbox">
+                                    <?php if ($one_task["ready"]): ?>
                                     <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1" checked>
-                                    <span class="checkbox__text"><?= $one_task["Task_name"]; ?></span>
+                                    <?php else: ?>
+                                    <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1" >
+                                    <?php endif; ?> 
+                                    <span class="checkbox__text"><?= $one_task["task_name"]; ?></span>
                                 </label>
                             </td>
 
@@ -159,28 +166,10 @@ $tasks = [
                                 <a class="download-link" href="#"></a>
                             </td>
 
-                            <td class="task__date"><?= $one_task["Deadline"]; ?></td>
+                            <td class="task__date"><?= $one_task["deadline"]; ?></td>
                             <td class="task__controls">
                                 </td>
                         </tr>
-                        <?php else: ?>
-                        <tr class="tasks__item task">
-                            <td class="task__select">
-                                <label class="checkbox task__checkbox">
-                                    <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
-                                    <span class="checkbox__text"><?= $one_task["Task_name"]; ?></span>
-                                </label>
-                            </td>
-
-                            <td class="task__file">
-                                <a class="download-link" href="#"></a>
-                            </td>
-
-                            <td class="task__date"><?= $one_task["Deadline"]; ?></td>
-                            <td class="task__controls">
-                                </td>
-                        </tr>
-                        <?php endif; ?>
                         <?php endforeach; ?>
                         <!--показывать следующий тег <tr/>, если переменная $show_complete_tasks равна единице-->
                     </table>
