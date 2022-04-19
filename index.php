@@ -1,6 +1,55 @@
 <?php
 // показывать или нет выполненные задачи
 $show_complete_tasks = rand(0, 1);
+
+$projects = [
+    'Входящие',
+    'Учеба',
+    'Работа',
+    'Домашние дела',
+    'Авто',
+];
+
+$tasks = [
+    [
+        'task_name' => 'Собеседование в IT компании',
+        'deadline' => '01.12.2019',
+        'project' => 'Работа',
+        'ready' => false
+    ],
+    [
+        'task_name' => 'Выполнить тестовое задание',
+        'deadline' => '25.12.2019',
+        'project' => 'Работа',
+        'ready' => false
+    ],
+    [
+        'task_name' => 'Сделать задание первого раздела',
+        'deadline' => '21.12.2019',
+        'project' => 'Учеба',
+        'ready' => true
+    ],
+    [
+        'task_name' => 'Встреча с другом',
+        'deadline' => '22.12.2019',
+        'project' => 'Входящие',
+        'ready' => false
+    ],
+    [
+        'task_name' => 'Купить корм для кота',
+        'deadline' => null,
+        'project' => 'Домашние дела',
+        'ready' => false
+    ],
+    [
+        'task_name' => 'Заказать пиццу',
+        'deadline' => null,
+        'project' => 'Домашние дела',
+        'ready' => false
+    ],
+];
+
+
 ?>
 <!DOCTYPE html>
 
@@ -43,11 +92,13 @@ $show_complete_tasks = rand(0, 1);
 
                     <nav class="main-navigation">
                         <ul class="main-navigation__list">
+                             <?php foreach ($projects as $one_project): ?>
                             <li class="main-navigation__list-item">
-                                <a class="main-navigation__list-item-link" href="#">Название проекта</a>
+                                <a class="main-navigation__list-item-link" href="#"><?= $one_project; ?></a>
                                 <span class="main-navigation__list-item-count">0</span>
                             </li>
-                        </ul>
+                            <?php endforeach; ?>
+                         </ul>
                     </nav>
 
                     <a class="button button--transparent button--plus content__side-button" href="pages/form-project.html" target="project_add">Добавить проект</a>
@@ -72,9 +123,8 @@ $show_complete_tasks = rand(0, 1);
 
                         <label class="checkbox">
                             <!--добавить сюда атрибут "checked", если переменная $show_complete_tasks равна единице-->
-
-                            <input class="checkbox__input visually-hidden show_completed" type="checkbox" <?php if ($show_complete_tasks == 1) : ?> checked <?php endif; ?>>
-                        <span class="checkbox__text">Показывать выполненные</span>
+                            <input class="checkbox__input visually-hidden show_completed" type="checkbox" <?php if ($show_complete_tasks == 1) echo " checked"; ?>>
+                            <span class="checkbox__text">Показывать выполненные</span>
                         </label>
                     </div>
 
@@ -93,21 +143,27 @@ $show_complete_tasks = rand(0, 1);
 
                             <td class="task__date"></td>
                         </tr>
-                        <?php if ($show_complete_tasks == 1) : ?>
-                            echo
-                            <tr class="tasks__item task task--completed">
-                                <td class="task__select">
-                                    <label class="checkbox task__checkbox">
-                                        <input class="checkbox__input visually-hidden" type="checkbox" checked>
-                                        <span class="checkbox__text">Записаться на интенсив "Базовый PHP"</span>
-                                    </label>
-                                </td>
-                                <td class="task__date">10.10.2019</td>
 
-                                <td class="task__controls">
+                        <?php foreach ($tasks as $one_task): 
+                         if ($show_complete_tasks == 0 and $one_task["ready"] == true) continue; ?>
+                        <tr class="tasks__item task<?php if ($one_task["ready"]) echo ' task--completed'; ?>"> 
+                            <td class="task__select">
+                                <label class="checkbox task__checkbox">
+                                    <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1" <?php if ($one_task["ready"]) echo ' checked';?>>
+                                    <span class="checkbox__text"><?= $one_task["task_name"]; ?></span>
+                                </label>
+                            </td>
+
+                            <td class="task__file">
+                                <a class="download-link" href="#"></a>
+                            </td>
+
+                            <td class="task__date"><?= $one_task["deadline"]; ?></td>
+                            <td class="task__controls">
                                 </td>
-                            </tr>
-                        <?php endif; ?>
+                        </tr>
+                        <?php endforeach; ?>
+
                         <!--показывать следующий тег <tr/>, если переменная $show_complete_tasks равна единице-->
                     </table>
                 </main>
@@ -174,4 +230,7 @@ $show_complete_tasks = rand(0, 1);
     <script src="script.js"></script>
 </body>
 
+
 </html>
+
+
