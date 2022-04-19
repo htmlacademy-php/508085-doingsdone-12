@@ -3,49 +3,49 @@
 $show_complete_tasks = rand(0, 1);
 
 $projects = [
-    "Входящие",
-    "Учеба",
-    "Работа",
-    "Домашние дела",
-    "Авто",
+    'Входящие',
+    'Учеба',
+    'Работа',
+    'Домашние дела',
+    'Авто',
 ];
 
 $tasks = [
     [
-        "task_name" => "Собеседование в IT компании",
-        "deadline" => "01.12.2019",
-        "project" => "Работа",
-        "ready" => false
+        'task_name' => 'Собеседование в IT компании',
+        'deadline' => '01.12.2019',
+        'project' => 'Работа',
+        'ready' => false
     ],
     [
-        "task_name" => "Выполнить тестовое задание",
-        "deadline" => "25.12.2019",
-        "project" => "Работа",
-        "ready" => false
+        'task_name' => 'Выполнить тестовое задание',
+        'deadline' => '25.12.2019',
+        'project' => 'Работа',
+        'ready' => false
     ],
     [
-        "task_name" => "Сделать задание первого раздела",
-        "deadline" => "21.12.2019",
-        "project" => "Учеба",
-        "ready" => true
+        'task_name' => 'Сделать задание первого раздела',
+        'deadline' => '21.12.2019',
+        'project' => 'Учеба',
+        'ready' => true
     ],
     [
-        "task_name" => "Встреча с другом",
-        "deadline" => "22.12.2019",
-        "project" => "Входящие",
-        "ready" => false
+        'task_name' => 'Встреча с другом',
+        'deadline' => '22.12.2019',
+        'project' => 'Входящие',
+        'ready' => false
     ],
     [
-        "task_name" => "Купить корм для кота",
-        "deadline" => null,
-        "project" => "Домашние дела",
-        "ready" => false
+        'task_name' => 'Купить корм для кота',
+        'deadline' => null,
+        'project' => 'Домашние дела',
+        'ready' => false
     ],
     [
-        "task_name" => "Заказать пиццу",
-        "deadline" => null,
-        "project" => "Домашние дела",
-        "ready" => false
+        'task_name' => 'Заказать пиццу',
+        'deadline' => null,
+        'project' => 'Домашние дела',
+        'ready' => false
     ],
 ];
 
@@ -91,14 +91,14 @@ $tasks = [
                     <h2 class="content__side-heading">Проекты</h2>
 
                     <nav class="main-navigation">
-                        <?php foreach ($projects as $one_project): ?>
                         <ul class="main-navigation__list">
+                             <?php foreach ($projects as $one_project): ?>
                             <li class="main-navigation__list-item">
                                 <a class="main-navigation__list-item-link" href="#"><?= $one_project; ?></a>
                                 <span class="main-navigation__list-item-count">0</span>
                             </li>
-                        </ul>
-                        <?php endforeach; ?>
+                            <?php endforeach; ?>
+                         </ul>
                     </nav>
 
                     <a class="button button--transparent button--plus content__side-button" href="pages/form-project.html" target="project_add">Добавить проект</a>
@@ -146,7 +146,7 @@ $tasks = [
                         </tr>
                         <?php foreach ($tasks as $one_task): 
                          if ($show_complete_tasks == 0 and $one_task["ready"] == true) continue; ?>
-                        <tr class="tasks__item task<?php if ($one_task["ready"]) echo '--completed'; ?>"> 
+                        <tr class="tasks__item task<?php if ($one_task["ready"]) echo ' task--completed'; ?>"> 
                             <td class="task__select">
                                 <label class="checkbox task__checkbox">
                                     <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1" <?php if ($one_task["ready"]) echo ' checked';?>>
