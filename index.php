@@ -47,9 +47,10 @@ $tasks = [
         'project' => 'Домашние дела',
         'ready' => false
     ],
+
 ];
 
-
+require "script.php";
 ?>
 <!DOCTYPE html>
 
@@ -92,10 +93,10 @@ $tasks = [
 
                     <nav class="main-navigation">
                         <ul class="main-navigation__list">
-                             <?php foreach ($projects as $one_project): ?>
+                            <?php foreach ($projects as $one_project): ?>
                             <li class="main-navigation__list-item">
                                 <a class="main-navigation__list-item-link" href="#"><?= $one_project; ?></a>
-                                <span class="main-navigation__list-item-count">0</span>
+                                <span class="main-navigation__list-item-count"><?php count_tasks($tasks, $one_project); ?></span>
                             </li>
                             <?php endforeach; ?>
                          </ul>
@@ -149,7 +150,7 @@ $tasks = [
                         <tr class="tasks__item task<?php if ($one_task["ready"]) echo ' task--completed'; ?>"> 
                             <td class="task__select">
                                 <label class="checkbox task__checkbox">
-                                    <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1" <?php if ($one_task["ready"]) echo ' checked';?>>
+                                    <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1"<?php if ($one_task["ready"]) echo ' checked';?>>
                                     <span class="checkbox__text"><?= $one_task["task_name"]; ?></span>
                                 </label>
                             </td>
