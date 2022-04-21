@@ -1,4 +1,5 @@
 <?php
+require_once "my_functions.php";
 // показывать или нет выполненные задачи
 $show_complete_tasks = rand(0, 1);
 
@@ -50,7 +51,7 @@ $tasks = [
 
 ];
 
-require "script.php";
+
 ?>
 <!DOCTYPE html>
 
@@ -96,7 +97,7 @@ require "script.php";
                             <?php foreach ($projects as $one_project): ?>
                             <li class="main-navigation__list-item">
                                 <a class="main-navigation__list-item-link" href="#"><?= $one_project; ?></a>
-                                <span class="main-navigation__list-item-count"><?php count_tasks($tasks, $one_project); ?></span>
+                                <span class="main-navigation__list-item-count"><?= count_tasks($tasks, $one_project); ?></span>
                             </li>
                             <?php endforeach; ?>
                          </ul>
