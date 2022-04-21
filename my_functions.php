@@ -1,8 +1,9 @@
 <?php
 /**
+ * возвращает количество задач относящихся к проекту
  * @param array $tasks массив с задачами
  * @param string $one_project название проекта 
- * @return integer возвращает количество задач относящихся к проекту
+ * @return integer 
  */
 
 function count_tasks($tasks, $one_project)

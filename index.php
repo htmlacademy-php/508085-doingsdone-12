@@ -1,5 +1,5 @@
 <?php
-require_once "my_functions.php";
+require_once 'my_functions.php';
 // показывать или нет выполненные задачи
 $show_complete_tasks = rand(0, 1);
 
