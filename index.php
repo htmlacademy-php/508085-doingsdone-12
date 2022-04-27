@@ -52,18 +52,16 @@ $tasks = [
 
 ];
 
-
-
 $name_title = [
     'user_name' => 'Дмитрий',
     'title' => 'Дела в порядке'
 ];
 
-
 $main = include_template('main.php', $tasks);
 
 $layout = include_template('layout.php', $name_title);
 print($layout);
-?>
+
+
 
 
