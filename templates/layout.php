@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title><?= $show_complete_tasks; ?></title>  <!--php переменная -->
+    <title><?= $title; ?></title>  <!--php переменная -->
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/flatpickr.min.css">
@@ -25,7 +25,7 @@
 
                     <div class="main-header__side-item user-menu">
                         <div class="user-menu__data">
-                            <p>Константин</p>
+                            <p><?= $user_name;?></p>
 
                             <a href="#">Выйти</a>
                         </div>
@@ -34,7 +34,7 @@
             </header>
 
             <div class="content"> <!--php ппеременная с контентом -->
-            <?php require('main.php'); ?>
+            <?= $content; ?>
             </div>
         </div>
     </div>
