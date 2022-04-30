@@ -4,7 +4,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <title><?= $title; ?></title>  <!--php переменная -->
+    <title><?= $title; ?></title>
+    <!--php переменная -->
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/flatpickr.min.css">
@@ -25,7 +26,7 @@
 
                     <div class="main-header__side-item user-menu">
                         <div class="user-menu__data">
-                            <p><?= $user_name;?></p>
+                            <p><?= $user_name; ?></p>
 
                             <a href="#">Выйти</a>
                         </div>
@@ -33,8 +34,25 @@
                 </div>
             </header>
 
-            <div class="content"> <!--php ппеременная с контентом -->
-            <?= $content; ?>
+            <div class="content">
+                <!--php ппеременная с контентом -->
+                <section class="content__side">
+                    <h2 class="content__side-heading">Проекты</h2>
+
+                    <nav class="main-navigation">
+                        <ul class="main-navigation__list">
+                            <?php foreach ($projects as $one_project) : ?>
+                                <li class="main-navigation__list-item">
+                                    <a class="main-navigation__list-item-link" href="#"><?= htmlspecialchars($one_project); ?></a>
+                                    <span class="main-navigation__list-item-count"><?= count_tasks($tasks, $one_project); ?></span>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </nav>
+
+                    <a class="button button--transparent button--plus content__side-button" href="pages/form-project.html" target="project_add">Добавить проект</a>
+                </section>
+                <?= $content; ?>
             </div>
         </div>
     </div>
@@ -99,4 +117,3 @@
 </body>
 
 </html>
-

@@ -4,13 +4,15 @@ require_once 'helpers.php';
 // показывать или нет выполненные задачи
 $show_complete_tasks = rand(0, 1);
 
-$main = include_template('main.php',  ['projects' => ['Входящие',
-'Учеба',
-'Работа',
-'Домашние дела',
-'Авто',
-],
-'tasks' => [
+$projects = [
+    'Входящие',
+    'Учеба',
+    'Работа',
+    'Домашние дела',
+    'Авто',
+];
+
+ $tasks = [
     [
         'task_name' => 'Собеседование в IT компании',
         'deadline' => '01.12.2019',
@@ -48,16 +50,26 @@ $main = include_template('main.php',  ['projects' => ['Входящие',
         'ready' => false
     ],
 
-]]);
+];
 
-$layout = include_template('layout.php', 
-['title' => 'Дела в порядке',
-'user_name' => 'Дмитрий',
-'content' => $main,
-]);
+
+$main = include_template(
+    'main.php',
+    [
+        'tasks' => $tasks,
+        show_complete_tasks => $show_complete_tasks,
+    ]
+);
+
+$layout = include_template(
+    'layout.php',
+    [
+        'title' => 'Дела в порядке',
+        'user_name' => 'Дмитрий',
+        'content' => $main,
+        'projects' => $projects,
+        'tasks' => $tasks,
+    ]
+);
 print($layout);
-?>
-
-
-
-
+ ?>
