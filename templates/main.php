@@ -24,20 +24,7 @@
     </div>
 
     <table class="tasks">
-        <tr class="tasks__item task">
-            <td class="task__select">
-                <label class="checkbox task__checkbox">
-                    <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
-                    <span class="checkbox__text">Сделать главную страницу Дела в порядке</span>
-                </label>
-            </td>
 
-            <td class="task__file">
-                <a class="download-link" href="#">Home.psd</a>
-            </td>
-
-            <td class="task__date"></td>
-        </tr>
         <?php foreach ($tasks as $one_task) :
             if ($show_complete_tasks == 0 and $one_task["ready"] == true) continue; ?>
             <tr class="tasks__item task<?php if ($one_task["ready"]) echo ' task--completed'; ?>">
@@ -52,7 +39,7 @@
                     <a class="download-link" href="#"></a>
                 </td>
 
-                <td class="task__date"><?= $one_task["deadline"]; ?></td>
+                <td class="task__date"><?= htmlspecialchars($one_task["deadline"]); ?></td>
                 <td class="task__controls">
                 </td>
             </tr>

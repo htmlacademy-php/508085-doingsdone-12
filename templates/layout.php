@@ -26,7 +26,7 @@
 
                     <div class="main-header__side-item user-menu">
                         <div class="user-menu__data">
-                            <p><?= $user_name; ?></p>
+                            <p><?= htmlspecialchars($user_name); ?></p>
 
                             <a href="#">Выйти</a>
                         </div>
@@ -52,7 +52,7 @@
 
                     <a class="button button--transparent button--plus content__side-button" href="pages/form-project.html" target="project_add">Добавить проект</a>
                 </section>
-                <?= $content; ?>
+                <?= $main; ?>
             </div>
         </div>
     </div>

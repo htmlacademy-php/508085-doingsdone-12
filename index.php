@@ -57,7 +57,7 @@ $main = include_template(
     'main.php',
     [
         'tasks' => $tasks,
-        show_complete_tasks => $show_complete_tasks,
+        'show_complete_tasks' => $show_complete_tasks,
     ]
 );
 
@@ -66,7 +66,7 @@ $layout = include_template(
     [
         'title' => 'Дела в порядке',
         'user_name' => 'Дмитрий',
-        'content' => $main,
+        'main' => $main,
         'projects' => $projects,
         'tasks' => $tasks,
     ]
