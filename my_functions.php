@@ -6,7 +6,6 @@
  * @param string $one_project название проекта 
  * @return integer 
  */
-
 function count_tasks($tasks, $one_project)
 {
      $count = 0;
@@ -22,21 +21,18 @@ function count_tasks($tasks, $one_project)
 
 
 /**
- * Считает количество часов оставшихся до срока истечения задачи
- * @param $date принимает дату 
- * @return integer 
+ * Если дата известна, считает количество часов оставшихся до срока задачи от настоящего момента
+ * @param $sample_date принимает дату и от этой даты вычитается настоящий момент времени, 
+ * отрицательное значение показывает, что срок уже прошел
+ * @return integer целочисленный выводится количество часов, возможны дробные числа
  */
-
-
-function count_hours($date)
-{
-     if (is_null($date)) {
-          $diff_in_hours = 100;
-     } elseif ($date) {
-          $sample_date  = strtotime($date);
-          $today = time();
-          $diff_total = $sample_date - $today;
-          $diff_in_hours = ($diff_total / 60) / 60;
+function count_hours($sample_date)
+{    $diff_in_hours = 25;
+     if (isset($sample_date)) {
+          $sample_date  = strtotime($sample_date);
+          $this_moment = time();
+          $diff_seconds = $sample_date - $this_moment;
+          $diff_in_hours = ($diff_seconds / 60) / 60;
      };
      return $diff_in_hours;
 }
