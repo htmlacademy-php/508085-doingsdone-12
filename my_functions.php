@@ -40,4 +40,5 @@ function count_hours($sample_date) {
      return $diff_in_hours;
 }
 
+
 ?>
