@@ -32,7 +32,7 @@ function count_hours($sample_date) {
           $ts_of_date  = strtotime($sample_date);
           $ts_current = time();
           $diff_seconds = $ts_of_date - $ts_current;
-          $diff_in_hours = $diff_seconds / 3660;
+          $diff_in_hours = $diff_seconds / 3600;
      }
      else {
           $diff_in_hours = 0;
