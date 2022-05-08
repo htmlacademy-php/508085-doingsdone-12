@@ -9,6 +9,7 @@ CREATE TABLE users (
     email email VARCHAR(128)
 );
 
+
 CREATE TABLE projects (
     id_user INT AUTO_INCREMENT PRIMARY KEY,
     project_name NOT NULL CHAR(64),
