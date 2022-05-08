@@ -3,11 +3,10 @@ CREATE DATABASE doinngsdone DEFAULT CHARACTER SET UTF -8 DEFAULT COLLATE utf8_ge
 CREATE TABLE users (
     id_user INT AUTO_INCREMENT PRIMARY KEY,
     dt_registered NOT NULL TIMESTAMP;
-
-password_user CHAR(64),
-avatar_path TEXT,
-project_name CHAR(64),
-email email VARCHAR(128)
+    password_user CHAR(64),
+    avatar_path TEXT,
+    project_name CHAR(64),
+    email email VARCHAR(128)
 );
 
 CREATE TABLE projects (
