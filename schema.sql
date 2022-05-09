@@ -1,26 +1,28 @@
 CREATE DATABASE doinngsdone DEFAULT CHARACTER SET UTF -8 DEFAULT COLLATE utf8_genetal_ci USE doinngsdone;
 
 CREATE TABLE users (
-    id_user INT AUTO_INCREMENT PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     dt_registered NOT NULL TIMESTAMP;
-    password_user CHAR(64),
-    avatar_path TEXT,
-    project_name CHAR(64),
-    email email VARCHAR(128)
+    password_hash NOT NULL VARCHAR(128),
+    avatar_path VARCHAR(128),
+    project_name NOT NULL CHAR(64),
+    email VARCHAR(128)
 );
 
 
 CREATE TABLE projects (
-    id_user INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT PRIMARY KEY,
+    id INT AUTO_INCREMENT NOT NULL,
     project_name NOT NULL CHAR(64),
-    user_connect TINYINT DEFAULT 'Yes'
+    user_connect TINYINT DEFAULT 1
 );
 
 CREATE TABLE tasks (
-    id_user INT AUTO_INCREMENT PRIMARY KEY,
-    project_name NOT NULL CHAR(64),
+    user_id INT PRIMARY KEY,
+    id INT AUTO_INCREMENT NOT NULL ,
+    project_id NOT NULL INT,
     task_name NOT NULL VARCHAR(128),
-    status_ready TINYINT DEFAULT 'No',
+    status_ready TINYINT DEFAULT 0,
     dt_add TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     dt_deadline TIMESTAMP
 );
