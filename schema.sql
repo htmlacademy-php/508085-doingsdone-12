@@ -25,6 +25,7 @@ CREATE TABLE tasks (
     status_ready TINYINT DEFAULT 0 COMMENT 'Статус готовности',
     dt_add TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT 'Таймстэмп заведения задачи',
     dt_deadline TIMESTAMP COMMENT 'Таймстэмп дедлайна',
-    INDEX (user_id, project_id)
+    INDEX (user_id),
+    INDEX (project_id)
 );
 
