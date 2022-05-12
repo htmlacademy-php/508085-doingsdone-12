@@ -15,19 +15,19 @@ $projects = [
  $tasks = [
     [
         'task_name' => 'Собеседование в IT компании',
-        'deadline' => '01.05.2022', // 01.12.2019
+        'deadline' => '01.12.2019', 
         'project' => 'Работа',
         'ready' => false
     ],
     [
         'task_name' => 'Выполнить тестовое задание',
-        'deadline' => '25.12.2022', //25.12.2019
+        'deadline' => '25.12.2019', 
         'project' => 'Работа',
         'ready' => false
     ],
     [
         'task_name' => 'Сделать задание первого раздела',
-        'deadline' => '21.12.2019',
+        'deadline' => '21.12.2019', 
         'project' => 'Учеба',
         'ready' => true
     ],

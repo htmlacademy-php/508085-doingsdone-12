@@ -21,19 +21,22 @@ function count_tasks($tasks, $one_project)
 
 
 /**
- * Если дата известна, считает количество часов оставшихся до срока задачи от настоящего момента
- * @param $sample_date принимает дату и от этой даты вычитается настоящий момент времени, 
- * отрицательное значение показывает, что срок уже прошел
- * @return integer целочисленный выводится количество часов, возможны дробные числа
+* Получаем интервал времени от текущего момента до заданной даты (в час).
+ *      Результат возможен с дробной частью.
+ *      Отрицательное значение говорит о том, что указанная дата уже в прошлом.
+ * @param string $sample_date дата в формате 'dd.mm.yyyy'
+ * @return float положительное, нулевое или отрицательное число
  */
-function count_hours($sample_date)
-{    $diff_in_hours = 25;
-     if (isset($sample_date)) {
-          $sample_date  = strtotime($sample_date);
-          $this_moment = time();
-          $diff_seconds = $sample_date - $this_moment;
-          $diff_in_hours = ($diff_seconds / 60) / 60;
-     };
+function count_hours($sample_date) {
+     if ($sample_date) {
+          $ts_of_date  = strtotime($sample_date);
+          $ts_current = time();
+          $diff_seconds = $ts_of_date - $ts_current;
+          $diff_in_hours = $diff_seconds / 3600;
+     }
+     else {
+          $diff_in_hours = 0;
+     }
      return $diff_in_hours;
 }
 
