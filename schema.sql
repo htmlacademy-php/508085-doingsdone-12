@@ -2,7 +2,7 @@ CREATE DATABASE doinngsdone DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_gene
   
 USE doinngsdone;
 
-CREATE TABLE users (
+CREATE TABLE user (
     id INT AUTO_INCREMENT PRIMARY KEY COMMENT 'Идентификатор пользователя',
     dt_registered TIMESTAMP NOT NULL COMMENT 'Таймстэмп регистрации',
     password_hash VARCHAR(128) NOT NULL COMMENT 'Хэш пароля',
@@ -10,14 +10,14 @@ CREATE TABLE users (
     email VARCHAR(128) UNIQUE COMMENT 'Емаил адрес'
 );
 
-CREATE TABLE projects (
+CREATE TABLE project (
     id INT AUTO_INCREMENT PRIMARY KEY COMMENT 'Идентификатор проекта',
     user_id INT NOT NULL COMMENT 'Пользователь, которому принадлежит проект',
     project_name VARCHAR(128) NOT NULL COMMENT 'Название проекта',
     INDEX (user_id)
 );
 
-CREATE TABLE tasks (
+CREATE TABLE task (
     id INT AUTO_INCREMENT PRIMARY KEY COMMENT 'Идентификатор задачи',
     user_id INT NOT NULL COMMENT 'Пользователь, которому принадлежит задача',
     project_id INT NOT NULL COMMENT 'Проект, которому принадлежит задача',
