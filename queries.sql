@@ -22,8 +22,6 @@ INSERT INTO task (task_name, dt_deadline, status_ready, user_id, project_id) VAL
 
 
 
-
-
 -- получить список из всех проектов для одного пользователя:
 SELECT project_name FROM project WHERE user_id = 2; 
 
