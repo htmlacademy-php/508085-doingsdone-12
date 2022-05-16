@@ -29,8 +29,7 @@ SELECT project_name FROM project WHERE user_id = 2;
 SELECT task_name FROM task WHERE project_id = 3; 
 
 -- пометить задачу как выполненную:
-UPDATE task SET status_ready = 1 WHERE task_name = 'Собеседование в IT компании'; 
+UPDATE task SET status_ready = 1 WHERE id = 1; 
 
 -- обновить название задачи по её идентификатору:
 UPDATE task SET task_name = 'Новое название' WHERE id = 5; 
-
