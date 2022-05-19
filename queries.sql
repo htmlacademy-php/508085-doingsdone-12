@@ -1,7 +1,6 @@
-INSERT INTO user (dt_registered, password_hash, avatar_path, email) VALUES ('01.01.2005', 'a1a1a1', 'avt_1.jpeg', 'user@email.ru'); -- 1
-INSERT INTO user (dt_registered, password_hash, avatar_path, email) VALUES ('01.02.2005', 'a2a2a2', 'avt_2.jpeg', 'user_2@email.ru'); -- 2
-INSERT INTO user (dt_registered, password_hash, avatar_path, email) VALUES ('01.03.2005', 'a3a3a3', 'avt_3.jpeg', 'user_3@email.ru'); -- 3
-
+INSERT INTO user (dt_registered, password_hash, avatar_path, name, email) VALUES ('01.01.2005', 'a1a1a1', 'avt_1.jpeg', 'Вася', 'user@email.ru'); -- 1
+INSERT INTO user (dt_registered, password_hash, avatar_path, name, email) VALUES ('01.02.2005', 'a2a2a2', 'avt_2.jpeg', 'Антон', 'user_2@email.ru'); -- 2
+INSERT INTO user (dt_registered, password_hash, avatar_path, name, email) VALUES ('01.03.2005', 'a3a3a3', 'avt_3.jpeg', 'Олег', 'user_3@email.ru'); -- 3
 
 
 INSERT INTO project (project_name, user_id) VALUES ('Входящие', 1);

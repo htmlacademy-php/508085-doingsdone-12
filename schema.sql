@@ -7,6 +7,7 @@ CREATE TABLE user (
     dt_registered TIMESTAMP NOT NULL COMMENT 'Таймстэмп регистрации',
     password_hash VARCHAR(128) NOT NULL COMMENT 'Хэш пароля',
     avatar_path VARCHAR(128) COMMENT 'Путь аватарки',
+    name VARCHAR(128) COMMENT 'Имя пользователя',
     email VARCHAR(128) UNIQUE COMMENT 'Емаил адрес'
 );
 
