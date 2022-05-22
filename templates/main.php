@@ -39,7 +39,7 @@
                     <a class="download-link" href="#"></a>
                 </td>
 
-                <td class="task__date"><?= htmlspecialchars($one_task["deadline"]); ?></td>
+                <td class="task__date"> <?= htmlspecialchars(mb_strcut($one_task["dt_deadline"],0, 10)); ?> </td> 
                 <td class="task__controls">
                 </td>
             </tr>
@@ -47,3 +47,5 @@
         <!--показывать следующий тег <tr/>, если переменная $show_complete_tasks равна единице-->
     </table>
 </main>
+
+
