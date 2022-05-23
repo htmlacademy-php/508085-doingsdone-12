@@ -26,11 +26,11 @@
     <table class="tasks">
 
         <?php foreach ($tasks as $one_task) :
-            if ($show_complete_tasks == 0 and $one_task["ready"] == true) continue; ?>
-            <tr class="tasks__item task<?php if ($one_task["ready"]) echo ' task--completed'; elseif (count_hours($one_task["deadline"]) < 24) echo ' task--important'; ?>">
+            if ($show_complete_tasks == 0 and $one_task["status_ready"] == true) continue; ?>
+            <tr class="tasks__item task<?php if ($one_task["status_ready"]) echo ' task--completed'; elseif (count_hours($one_task["dt_deadline"]) < 24) echo ' task--important'; ?>">
                 <td class="task__select">
                     <label class="checkbox task__checkbox">
-                        <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1" <?php if ($one_task["ready"]) echo ' checked'; ?>>
+                        <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1" <?php if ($one_task["status_ready"]) echo ' checked'; ?>>
                         <span class="checkbox__text"><?= htmlspecialchars($one_task["task_name"]); ?></span>
                     </label>
                 </td>
@@ -39,7 +39,7 @@
                     <a class="download-link" href="#"></a>
                 </td>
 
-                <td class="task__date"> <?= htmlspecialchars(mb_strcut($one_task["dt_deadline"],0, 10)); ?> </td> 
+                <td class="task__date"> <?= htmlspecialchars($one_task["dt_deadline"]); ?> </td> 
                 <td class="task__controls">
                 </td>
             </tr>

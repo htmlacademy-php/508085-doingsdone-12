@@ -10,7 +10,7 @@ function count_tasks($tasks, $one_project)
 {
      $count = 0;
      foreach ($tasks as $one) {
-          if ($one['project'] == $one_project) {
+          if ($one['project_name'] == $one_project) {
                $count++;
           }
      };

@@ -4,14 +4,6 @@ require_once 'helpers.php';
 // показывать или нет выполненные задачи
 $show_complete_tasks = rand(0, 1);
 
-# В сценарии главной страницы выполните подключение к MySQL.
-# Отправьте SQL-запрос для получения списка проектов у текущего пользователя.
-# Используйте эти данные для показа списка проектов и списка задач на главной странице.
-
-
-
-# Отправьте SQL-запрос для получения списка из всех задач у текущего пользователя.
-
 
 $con = mysqli_connect("localhost", "root", "mysql","doinngsdone"); 
 
@@ -21,7 +13,12 @@ if ($con == false) {
 else {
    #print("Соединение установлено");
    $sql_projects = "SELECT project_name FROM project";
-   $sql_tasks = "SELECT task_name, status_ready, dt_deadline FROM task";
+   
+   $sql_tasks = "SELECT task.task_name,
+   task.status_ready,
+   task.dt_deadline, 
+   project.project_name FROM task
+   LEFT JOIN project on project.id = task.project_id"; # "SELECT task_name, status_ready, dt_deadline FROM task"
 
    $sql_projects_result = mysqli_query($con, $sql_projects);
    $sql_tasks_result = mysqli_query($con, $sql_tasks);
@@ -32,14 +29,9 @@ else {
 
    if ($sql_tasks_result){
         $sql_tasks_arr = mysqli_fetch_all($sql_tasks_result, MYSQLI_ASSOC);
-        print($sql_tasks_arr[0]['task_name']);
-        // foreach ($sql_tasks_arr as $arr){
-        //     $foo = date_create($arr['dt_deadline']);
-        //     $foo = date_format($arr['dt_deadline'],"Y-m-d");
-            
-        // }
-//         print($foo);
-        #print($sql_tasks_arr[0]['dt_deadline']);#'2001-12-20'  2001-12-20 19:00:00 
+        print($sql_tasks_arr[0]['dt_deadline']);
+
+        
    }
 }
 
