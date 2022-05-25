@@ -18,6 +18,28 @@ function count_tasks($tasks, $one_project)
 };
 
 
+/**
+ * Возвращает количество задач относящихся к проекту
+ * через sql запрос
+ * @param string $one_project идентификатор проекта
+ * @return integer 
+ */
+function count_tasks2($one_project){  // циферка   
+     $query_count = "SELECT COUNT(id) AS cnt_id FROM task WHERE project_id = $one_project";
+     $con2 = mysqli_connect("localhost", "root", "mysql", "doinngsdone");
+
+     $result = mysqli_query($con2,  $query_count);
+     $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+     return $row[0]['cnt_id'];
+};
+     
+     
+     
+ 
+
+
+
 
 
 /**

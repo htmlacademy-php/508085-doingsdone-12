@@ -26,7 +26,7 @@
     <table class="tasks">
 
         <?php foreach ($tasks as $one_task) :
-            if ($show_complete_tasks == 0 and $one_task["status_ready"] == true) continue; ?>
+            if ($show_complete_tasks == 0 and $one_task["status_ready"] == 1) continue; ?>
             <tr class="tasks__item task<?php if ($one_task["status_ready"]) echo ' task--completed'; elseif (count_hours($one_task["dt_deadline"]) < 24) echo ' task--important'; ?>">
                 <td class="task__select">
                     <label class="checkbox task__checkbox">
