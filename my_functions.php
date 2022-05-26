@@ -21,15 +21,17 @@ function count_tasks($tasks, $one_project)
 /**
  * Возвращает количество задач относящихся к проекту
  * через sql запрос
- * @param string $one_project идентификатор проекта
+ * @param string $project_id идентификатор проекта
+ * @param $con подключкние к бд
  * @return integer 
  */
 function count_tasks2($con, $project_id){    
      $query_count = "SELECT COUNT(id) FROM task WHERE project_id = $project_id";
-     $result = mysqli_query($con,  $query_count);
+     $result = mysqli_query($con,  $query_count)
+          or exit('Ошибка подключения к бд в функции');
      $row = mysqli_fetch_row($result);
 
-     return $row[0]['COUNT(id)'];
+     return $row[0];
 };
      
      
