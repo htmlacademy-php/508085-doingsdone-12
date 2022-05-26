@@ -24,14 +24,12 @@ function count_tasks($tasks, $one_project)
  * @param string $one_project идентификатор проекта
  * @return integer 
  */
-function count_tasks2($one_project){  // циферка   
-     $query_count = "SELECT COUNT(id) AS cnt_id FROM task WHERE project_id = $one_project";
-     $con2 = mysqli_connect("localhost", "root", "mysql", "doinngsdone");
+function count_tasks2($con, $project_id){    
+     $query_count = "SELECT COUNT(id) FROM task WHERE project_id = $project_id";
+     $result = mysqli_query($con,  $query_count);
+     $row = mysqli_fetch_row($result);
 
-     $result = mysqli_query($con2,  $query_count);
-     $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
-
-     return $row[0]['cnt_id'];
+     return $row[0]['COUNT(id)'];
 };
      
      
