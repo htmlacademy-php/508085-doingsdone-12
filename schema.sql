@@ -7,6 +7,7 @@ CREATE TABLE user (
     dt_registered TIMESTAMP NOT NULL COMMENT 'Таймстэмп регистрации',
     password_hash VARCHAR(128) NOT NULL COMMENT 'Хэш пароля',
     avatar_path VARCHAR(128) COMMENT 'Путь аватарки',
+    name VARCHAR(128) COMMENT 'Имя пользователя',
     email VARCHAR(128) UNIQUE COMMENT 'Емаил адрес'
 );
 
@@ -24,7 +25,7 @@ CREATE TABLE task (
     task_name VARCHAR(128) NOT NULL COMMENT 'Название задачи',
     status_ready TINYINT DEFAULT 0 COMMENT 'Статус готовности',
     dt_add TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT 'Таймстэмп заведения задачи',
-    dt_deadline TIMESTAMP COMMENT 'Таймстэмп дедлайна',
+    dt_deadline VARCHAR(128) COMMENT 'Таймстэмп дедлайна', -- TIMESTAMP
     INDEX (user_id),
     INDEX (project_id)
 );

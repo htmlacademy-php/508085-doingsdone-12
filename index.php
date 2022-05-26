@@ -4,60 +4,38 @@ require_once 'helpers.php';
 // показывать или нет выполненные задачи
 $show_complete_tasks = rand(0, 1);
 
-$projects = [
-    'Входящие',
-    'Учеба',
-    'Работа',
-    'Домашние дела',
-    'Авто',
+
+$user = [
+    'id' => 1,
+    'user_name' => 'Вася',
 ];
 
- $tasks = [
-    [
-        'task_name' => 'Собеседование в IT компании',
-        'deadline' => '01.12.2019', 
-        'project' => 'Работа',
-        'ready' => false
-    ],
-    [
-        'task_name' => 'Выполнить тестовое задание',
-        'deadline' => '25.12.2019', 
-        'project' => 'Работа',
-        'ready' => false
-    ],
-    [
-        'task_name' => 'Сделать задание первого раздела',
-        'deadline' => '21.12.2019', 
-        'project' => 'Учеба',
-        'ready' => true
-    ],
-    [
-        'task_name' => 'Встреча с другом',
-        'deadline' => '22.12.2019',
-        'project' => 'Входящие',
-        'ready' => false
-    ],
-    [
-        'task_name' => 'Купить корм для кота',
-        'deadline' => null,
-        'project' => 'Домашние дела',
-        'ready' => false
-    ],
-    [
-        'task_name' => 'Заказать пиццу',
-        'deadline' => null,
-        'project' => 'Домашние дела',
-        'ready' => false
-    ],
+// подключение
+$con = mysqli_connect("localhost", "root", "mysql", "doinngsdone")
+    or exit("Ошибка подключения: " . mysqli_connect_error());
+mysqli_set_charset($con, 'utf8');
 
-];
+// получаем массив проектов
+$projects = "SELECT id, project_name FROM project";
+$projects_result = mysqli_query($con, $projects)
+    or exit('Ошибка получения массива задач');
+$projects_arr = mysqli_fetch_all($projects_result, MYSQLI_ASSOC);
+ 
+
+// получаем массив задач
+$tasks = "SELECT * FROM task";
+$tasks_result = mysqli_query($con, $tasks)
+    or exit('Ошибка получения массива задач');    
+$tasks_arr = mysqli_fetch_all($tasks_result, MYSQLI_ASSOC);
+    
 
 
 $main = include_template(
     'main.php',
     [
-        'tasks' => $tasks,
+        'tasks' => $tasks_arr, 
         'show_complete_tasks' => $show_complete_tasks,
+
     ]
 );
 
@@ -65,13 +43,14 @@ $layout = include_template(
     'layout.php',
     [
         'title' => 'Дела в порядке',
-        'user_name' => 'Дмитрий',
+        'user_name' => $user['user_name'],
         'main' => $main,
-        'projects' => $projects,
-        'tasks' => $tasks,
+        'projects' => $projects_arr, 
+        'tasks' => $tasks_arr, 
+        'con' => $con,
+
+
     ]
 );
 
 print($layout);
-
-
