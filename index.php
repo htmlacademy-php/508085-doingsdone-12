@@ -6,38 +6,36 @@ $show_complete_tasks = rand(0, 1);
 
 
 $user = [
-    'id' => 1,
+    'id' => 3,
     'user_name' => 'Вася',
 ];
+
+$user_id_current = $user['id'];
 
 // подключение
 $con = mysqli_connect("localhost", "root", "mysql", "doinngsdone")
     or exit("Ошибка подключения: " . mysqli_connect_error());
 mysqli_set_charset($con, 'utf8');
 
+
+
 // получаем массив проектов
-$projects = "SELECT id, project_name FROM project";
+$projects = "SELECT id, project_name, user_id FROM project WHERE user_id = $user_id_current";
 $projects_result = mysqli_query($con, $projects)
     or exit('Ошибка получения массива задач');
 $projects_arr = mysqli_fetch_all($projects_result, MYSQLI_ASSOC);
- 
 
 
 
-
-$params = $_GET;
 $scriptname = pathinfo(__FILE__, PATHINFO_BASENAME);
 
 
-// Получаем массив задач, но сначала
-// проверяем наличие get-параметра, если есть, 
-// то делаем запрос sql c условием, где project_id = get-параметру,
-// если нет, то берем все строки
-if (isset($params['project'])){
-    $get_param_project_id = $params['project'];
-    $tasks = "SELECT * FROM task WHERE project_id = $get_param_project_id";
-} else {
-    $tasks = "SELECT * FROM task";
+// Получаем массив задач, если есть get-параметр, 
+// то модифицируем запрос sql c условием, где project_id = get-параметру
+$tasks = "SELECT * FROM task WHERE user_id = $user_id_current";
+if (isset($_GET["project"])) {
+    $get_param_project_id = intval($_GET['project']);
+    $tasks  = $tasks . " AND project_id = $get_param_project_id";
 };
 $tasks_result = mysqli_query($con, $tasks)
     or exit('Ошибка получения массива задач'); 
@@ -46,30 +44,30 @@ $tasks_arr = mysqli_fetch_all($tasks_result, MYSQLI_ASSOC);
 
 
 
-// Проверяем наличие совпадений в get-параметре и массиве задач
+
+// Делаем ОБЩИЙ список задач для проверки совпадений get-параметров с ОБЩИМ списком id
+$tasks_total = "SELECT * FROM task";
+$tasks_result_total = mysqli_query($con, $tasks_total)
+    or exit('Ошибка получения общего массива задач'); 
+$tasks_arr_total = mysqli_fetch_all($tasks_result_total, MYSQLI_ASSOC);
+
+
 $checker_get_params = 0;
-$error = "Ошибка 404, такая страница отсутвует";
 foreach ($tasks_arr as $arr => $elem) {
-    if ($elem['project_id'] == $get_param_project_id) {
+    if($elem['project_id'] == $get_param_project_id){
         $checker_get_params++;
-    }   
+    };
 };
 
-
-if ($checker_get_params == 0 && $get_param_project_id) {
-    $layout = include_template(
-        'error.php',
-        [
-            'error' => $error,
-        ]
-    );
-} else {
-
+ // шаблоны
 $main = include_template(
     'main.php',
     [
         'tasks' => $tasks_arr, 
         'show_complete_tasks' => $show_complete_tasks,
+        'checker' => $checker_get_params,
+        'error' => 'Ошибка 404, такая страница отсутствует',
+        'params' => $_GET
 
     ]
 );
@@ -84,11 +82,12 @@ $layout = include_template(
         'tasks' => $tasks_arr, 
         'con' => $con,
         'scr_name' =>$scriptname,
-        'params' => $params,
+        'params' => $_GET,
+
 
 
     ]
 );
-}
+
 
 print($layout);
