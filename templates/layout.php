@@ -41,7 +41,7 @@
 
                     <nav class="main-navigation">
                         <ul class="main-navigation__list">
-                            <?php foreach ($projects as $one_project): ?>
+                            <?php foreach ($projects_arr as $one_project): ?>
                                 <li class="main-navigation__list-item<?php if ($_GET['project'] == $one_project['id']) echo ' main-navigation__list-item--active' ?>">
                                     <a class="main-navigation__list-item-link" href="?project=<?= $one_project['id'] ?>"><?= htmlspecialchars($one_project['project_name']); ?></a>
                                     <span class="main-navigation__list-item-count"><?= count_tasks2($con, $one_project['id']); ?></span> 

@@ -48,16 +48,15 @@ $tasks_arr = mysqli_fetch_all($tasks_result, MYSQLI_ASSOC);
 
 
 $checker_get_params = array_count_values(array_column($tasks_arr, 'project_id'))[$project_id];
-!$checker_get_params ? $checker_get_params = 0 : $checker_get_params = $checker_get_params;
-
+$checker_get_params = !$checker_get_params ? $checker_get_params = 0 : $checker_get_params = $checker_get_params;
 
  // шаблоны
 $main = include_template(
     'main.php',
     [
-        'tasks' => $tasks_arr, 
+        'tasks_arr' => $tasks_arr, 
         'show_complete_tasks' => $show_complete_tasks,
-        'checker' => $checker_get_params,
+        'checker_get_params' => $checker_get_params,
 
 
     ]
@@ -69,8 +68,7 @@ $layout = include_template(
         'title' => 'Дела в порядке',
         'user_name' => $user['user_name'],
         'main' => $main,
-        'projects' => $projects_arr, 
-        'tasks' => $tasks_arr, 
+        'projects_arr' => $projects_arr, 
         'con' => $con,
         'scr_name' =>$scriptname,
     ]
