@@ -10,7 +10,7 @@ $user = [
     'user_name' => 'Вася',
 ];
 
-$user_id_current = $user['id'];
+$user_id = $user['id'];
 
 // подключение
 $con = mysqli_connect("localhost", "root", "mysql", "doinngsdone")
@@ -20,7 +20,7 @@ mysqli_set_charset($con, 'utf8');
 
 
 // получаем массив проектов
-$projects = "SELECT id, project_name, user_id FROM project WHERE user_id = $user_id_current";
+$projects = "SELECT id, project_name, user_id FROM project WHERE user_id = $user_id";
 $projects_result = mysqli_query($con, $projects)
     or exit('Ошибка получения массива задач');
 $projects_arr = mysqli_fetch_all($projects_result, MYSQLI_ASSOC);
@@ -32,32 +32,24 @@ $scriptname = pathinfo(__FILE__, PATHINFO_BASENAME);
 
 // Получаем массив задач, если есть get-параметр, 
 // то модифицируем запрос sql c условием, где project_id = get-параметру
-$tasks = "SELECT * FROM task WHERE user_id = $user_id_current";
+$tasks = "SELECT * FROM task WHERE user_id = $user_id";
 if (isset($_GET["project"])) {
-    $get_param_project_id = intval($_GET['project']);
-    $tasks  = $tasks . " AND project_id = $get_param_project_id";
+  
+    
+   $project_id = filter_input(INPUT_GET, 'project', FILTER_SANITIZE_NUMBER_INT);
+   $tasks .= " AND project_id = $project_id";
 };
+
+
+
 $tasks_result = mysqli_query($con, $tasks)
     or exit('Ошибка получения массива задач'); 
 $tasks_arr = mysqli_fetch_all($tasks_result, MYSQLI_ASSOC);
 
 
+$checker_get_params = array_count_values(array_column($tasks_arr, 'project_id'))[$project_id];
+!$checker_get_params ? $checker_get_params = 0 : $checker_get_params = $checker_get_params;
 
-
-
-// Делаем ОБЩИЙ список задач для проверки совпадений get-параметров с ОБЩИМ списком id
-$tasks_total = "SELECT * FROM task";
-$tasks_result_total = mysqli_query($con, $tasks_total)
-    or exit('Ошибка получения общего массива задач'); 
-$tasks_arr_total = mysqli_fetch_all($tasks_result_total, MYSQLI_ASSOC);
-
-
-$checker_get_params = 0;
-foreach ($tasks_arr as $arr => $elem) {
-    if($elem['project_id'] == $get_param_project_id){
-        $checker_get_params++;
-    };
-};
 
  // шаблоны
 $main = include_template(
@@ -66,8 +58,7 @@ $main = include_template(
         'tasks' => $tasks_arr, 
         'show_complete_tasks' => $show_complete_tasks,
         'checker' => $checker_get_params,
-        'error' => 'Ошибка 404, такая страница отсутствует',
-        'params' => $_GET
+
 
     ]
 );
@@ -82,10 +73,6 @@ $layout = include_template(
         'tasks' => $tasks_arr, 
         'con' => $con,
         'scr_name' =>$scriptname,
-        'params' => $_GET,
-
-
-
     ]
 );
 

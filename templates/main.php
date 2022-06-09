@@ -1,5 +1,6 @@
 <main class="content__main">
-    <h2 class="content__main-heading"><?php if(!$checker && $params['project']) echo $error; else echo 'Список задач' ?></h2>
+    <h2 class="content__main-heading"><?php if(!$checker && $_GET['project']) echo 'Ошибка 404, такая страница отсутствует'; 
+                                            else echo 'Список задач' ?></h2>
 
     <form class="search-form" action="index.php" method="post" autocomplete="off">
         <input class="search-form__input" type="text" name="" value="" placeholder="Поиск по задачам">
