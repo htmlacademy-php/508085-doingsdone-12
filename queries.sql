@@ -32,4 +32,4 @@ SELECT task_name FROM task WHERE project_id = 3;
 UPDATE task SET status_ready = 1 WHERE id = 1; 
 
 -- обновить название задачи по её идентификатору:
-UPDATE task SET task_name = 'Заказать шаурму' WHERE id = 5; 
+UPDATE task SET task_name = 'Заказать шаурму и поесть в авто' WHERE id = 5; 
