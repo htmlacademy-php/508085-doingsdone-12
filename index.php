@@ -20,14 +20,11 @@ mysqli_set_charset($con, 'utf8');
 
 
 // получаем массив проектов
-$projects = "SELECT id, project_name, user_id FROM project WHERE user_id = $user_id";
+$projects = "SELECT id, project_name FROM project WHERE user_id = $user_id";
+
 $projects_result = mysqli_query($con, $projects)
     or exit('Ошибка получения массива задач');
 $projects_arr = mysqli_fetch_all($projects_result, MYSQLI_ASSOC);
-
-
-
-$scriptname = pathinfo(__FILE__, PATHINFO_BASENAME);
 
 
 // Получаем массив задач, если есть get-параметр, 
@@ -47,8 +44,12 @@ $tasks_result = mysqli_query($con, $tasks)
 $tasks_arr = mysqli_fetch_all($tasks_result, MYSQLI_ASSOC);
 
 
-$checker_get_params = array_count_values(array_column($tasks_arr, 'project_id'))[$project_id];
-$checker_get_params = !$checker_get_params ? $checker_get_params = 0 : $checker_get_params = $checker_get_params;
+$checker_get_param = array_count_values(array_column($tasks_arr, 'project_id'))[$project_id];
+$checker_get_param = $checker_get_param ?: 0;
+
+
+$logic_for_h2 = (!$checker_get_param && $project_id) ? 0 : 1;
+
 
  // шаблоны
 $main = include_template(
@@ -56,9 +57,9 @@ $main = include_template(
     [
         'tasks_arr' => $tasks_arr, 
         'show_complete_tasks' => $show_complete_tasks,
-        'checker_get_params' => $checker_get_params,
-
-
+        'checker_get_param' => $checker_get_param,
+        'project_id' => $project_id,
+        'logic_for_h2' => $logic_for_h2,
     ]
 );
 
@@ -66,11 +67,11 @@ $layout = include_template(
     'layout.php',
     [
         'title' => 'Дела в порядке',
-        'user_name' => $user['user_name'],
+        'user' => $user['user_name'],
         'main' => $main,
-        'projects_arr' => $projects_arr, 
         'con' => $con,
-        'scr_name' =>$scriptname,
+        'projects_arr'=> $projects_arr,
+        'project_id' => $project_id
     ]
 );
 

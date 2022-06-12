@@ -1,5 +1,5 @@
 <main class="content__main">
-    <h2 class="content__main-heading"><?php if(!$checker_get_params && $_GET['project']) echo 'Ошибка 404, такая страница отсутствует'; 
+    <h2 class="content__main-heading"><?php if($logic_for_h2 == 0 ) echo 'Ошибка 404, такая страница отсутствует'; 
                                             else echo 'Список задач' ?></h2>
 
     <form class="search-form" action="index.php" method="post" autocomplete="off">
