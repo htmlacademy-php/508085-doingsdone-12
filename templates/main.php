@@ -1,5 +1,14 @@
+<?php
+
+
+require_once 'my_functions.php';
+require_once 'variables.php';
+require_once 'helpers.php';
+?>
+
 <main class="content__main">
-    <h2 class="content__main-heading">Список задач</h2>
+    <h2 class="content__main-heading"><?php if($logic_for_h2 == 0 ) echo 'Ошибка 404, такая страница отсутствует'; 
+                                            else echo 'Список задач' ?></h2>
 
     <form class="search-form" action="index.php" method="post" autocomplete="off">
         <input class="search-form__input" type="text" name="" value="" placeholder="Поиск по задачам">
@@ -25,7 +34,7 @@
 
     <table class="tasks">
 
-        <?php foreach ($tasks as $one_task) :
+        <?php foreach ($tasks_arr as $one_task) :
             if ($show_complete_tasks == 0 and $one_task["status_ready"] == 1) continue; ?>
             <tr class="tasks__item task<?php if ($one_task["status_ready"]) echo ' task--completed'; elseif (count_hours($one_task["dt_deadline"]) < 24) echo ' task--important'; ?>">
                 <td class="task__select">
@@ -35,12 +44,12 @@
                     </label>
                 </td>
 
-                <td class="task__file">
-                    <a class="download-link" href="#"></a>
+                <td class="task__file">                     
+                    <a class="download-link" href="<?= $one_task['file_path'] ?>"></a> 
                 </td>
 
                 <td class="task__date"> <?= htmlspecialchars($one_task["dt_deadline"]); ?> </td> 
-                <td class="task__controls">
+                <td class="task__controls"> 
                 </td>
             </tr>
         <?php endforeach; ?>
