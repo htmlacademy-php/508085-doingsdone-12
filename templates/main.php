@@ -5,7 +5,7 @@ require_once 'my_functions.php';
 require_once 'variables.php';
 require_once 'helpers.php';
 ?>
-
+<?php print($logic_for_h2) ?>
 <main class="content__main">
     <h2 class="content__main-heading"><?php if($logic_for_h2 == 0 ) echo 'Ошибка 404, такая страница отсутствует'; 
                                             else echo 'Список задач' ?></h2>

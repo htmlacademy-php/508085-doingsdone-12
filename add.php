@@ -4,6 +4,22 @@ require_once 'variables.php';
 require_once 'my_functions.php';
 require_once 'helpers.php';
 
+
+
+$projects_arr = base_extr('project', $user_id);
+$tasks_arr = base_extr('task', $user_id);
+
+
+
+
+
+// все варианты проектов
+$query_all_projects = "SELECT id, project_name FROM project";
+$all_projects_result = mysqli_query($mysql, $query_all_projects);
+$all_projects_arr = mysqli_fetch_all($all_projects_result, MYSQLI_ASSOC);
+
+
+
 // получение и размещение в папку uploads загруженного файла
 if (isset($_FILES['file'])) {
   $file_name = $_FILES['file']['name'];

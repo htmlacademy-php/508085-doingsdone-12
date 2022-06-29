@@ -4,6 +4,24 @@ require_once 'my_functions.php';
 require_once 'variables.php';
 require_once 'helpers.php';
 
+// массивы задач и проектов
+$projects_arr = base_extr('project', $user_id);
+$tasks_arr = base_extr('task', $user_id);
+$projects_arr_name_by_tasks = merge_extr($user_id);
+
+
+
+
+// изввлекаем get-параметр номера проекта
+$project_id = filter_input(INPUT_GET, 'project', FILTER_SANITIZE_NUMBER_INT);
+
+ 
+$checker_get_param = array_count_values(array_column($tasks_arr, 'project_id'))[$project_id];
+$checker_get_param = $checker_get_param ?: 0;
+
+$logic_for_h2 = (!$checker_get_param && $project_id) ? 0 : 1;
+
+
 
 
 
