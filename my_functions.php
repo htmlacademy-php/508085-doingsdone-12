@@ -22,13 +22,13 @@ function count_tasks($tasks, $one_project)
  * Возвращает количество задач относящихся к проекту
  * через sql запрос
  * @param string $project_id идентификатор проекта
- * @param $con подключкние к бд
+ * @param $mysql подключкние к бд
  * @param int $user_id идетификатор пользователя
  * @return integer 
  */
-function count_tasks2($con, $project_id, $user_id){    
+function count_tasks2($mysql, $project_id, $user_id){    
      $query_count = "SELECT COUNT(id) FROM task WHERE project_id = $project_id and user_id = $user_id";
-     $result = mysqli_query($con,  $query_count)
+     $result = mysqli_query($mysql,  $query_count)
           or exit('Ошибка подключения к бд в функции');
      $row = mysqli_fetch_row($result);
 
@@ -64,9 +64,9 @@ function count_hours($sample_date) {
 * @return array 2-мерный массив
 */
 function base_extr($base, $user_id) {
-     $con = mysqli_connect("localhost", "root", "mysql", "doinngsdone")
+     $mysql = mysqli_connect("localhost", "root", "mysql", "doinngsdone")
           or exit("Ошибка подключения: " . mysqli_connect_error());
-     mysqli_set_charset($con, 'utf8');
+     mysqli_set_charset($mysql, 'utf8');
 
 
      $sample_query = "SELECT * FROM $base WHERE user_id = $user_id"; // получаем все из таблицы
@@ -76,7 +76,7 @@ function base_extr($base, $user_id) {
           $sample_query .= " AND project_id =  $project_id";  // добавляем фильтрацию по текущему проекту
      };     
      
-     $sample_query_result = mysqli_query($con, $sample_query);
+     $sample_query_result = mysqli_query($mysql, $sample_query);
      $sample_query_arr = mysqli_fetch_all($sample_query_result, MYSQLI_ASSOC);
      return $sample_query_arr;
 };
@@ -105,14 +105,14 @@ function get_post_val($name) {
 * @return array 2-мерный массив
 */
 function merge_extr($user_id) {
-     $con = mysqli_connect("localhost", "root", "mysql", "doinngsdone")
+     $mysql = mysqli_connect("localhost", "root", "mysql", "doinngsdone")
      or exit("Ошибка подключения: " . mysqli_connect_error());
-     mysqli_set_charset($con, 'utf8');   
+     mysqli_set_charset($mysql, 'utf8');   
 
      $some_query = "SELECT DISTINCT project_name, project_id FROM (
           SELECT project_name, project_id FROM project RIGHT JOIN task ON task.project_id = project.id WHERE task.user_id = $user_id
           ) AS t;";
-     $some_query_result = mysqli_query($con, $some_query);
+     $some_query_result = mysqli_query($mysql, $some_query);
      $some_query_arr = mysqli_fetch_all($some_query_result, MYSQLI_ASSOC);
 return $some_query_arr;
 };

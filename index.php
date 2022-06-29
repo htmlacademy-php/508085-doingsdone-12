@@ -1,7 +1,10 @@
 <?php
+
 require_once 'my_functions.php';
 require_once 'variables.php';
 require_once 'helpers.php';
+
+
 
 
 $main = include_template(
@@ -21,7 +24,7 @@ $layout = include_template(
         'title' => 'Дела в порядке',
         'user' => $user['user_name'],
         'main' => $main,
-        'con' => $con,
+        'mysql' => $mysql,
         'projects_arr'=> $projects_arr,
         'project_id' => $project_id,
         'user_id' => $user_id,

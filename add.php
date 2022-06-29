@@ -36,7 +36,7 @@ foreach ($form_arr as $one_form) {
 if ($_SERVER['REQUEST_METHOD'] == 'POST' and $errors_counter == 0) {
   
   $insert_in_task = "INSERT INTO task (task_name, dt_deadline, status_ready, user_id, project_id, file_path) VALUES ('$name_val', '$date_val', false, '$user_id', '$project_val', '$file_url')";
-  mysqli_query($con, $insert_in_task);
+  mysqli_query($mysql, $insert_in_task);
   header("Location: /508085-doingsdone-12/");
 } else {
 
@@ -56,7 +56,7 @@ $layout = include_template(
       'title' => 'Дела в порядке',
       'user' => $user['user_name'],
       'main' => $add_temp,
-      'con' => $con,
+      'mysql' => $mysql,
       'projects_arr'=> $projects_arr,
       'project_id' => $project_id,
       'user_id' => $user_id,
