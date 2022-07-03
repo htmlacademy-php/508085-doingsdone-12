@@ -59,15 +59,12 @@ function count_hours($sample_date) {
 /**
 * Извлекает все из заданной таблицы с фильтрацией по заданному user_id, 
 * если таблица != project и есть get-параметр добавляет фильтрацию по проекту в get-параметре
+* @param $mysql переменная подключения
 * @param string $base таблица
 * @param int $user_id идентификатор пользователя
 * @return array 2-мерный массив
 */
-function base_extr($base, $user_id) {
-     $mysql = mysqli_connect("localhost", "root", "mysql", "doinngsdone")
-          or exit("Ошибка подключения: " . mysqli_connect_error());
-     mysqli_set_charset($mysql, 'utf8');
-
+function base_extr($mysql, $base,$user_id) {
 
      $sample_query = "SELECT * FROM $base WHERE user_id = $user_id"; // получаем все из таблицы
 
@@ -84,7 +81,7 @@ function base_extr($base, $user_id) {
 
 
 
- // функция для возврата заполненной формы
+// функция для возврата заполненной формы
 /** 
 * Валидирует параметр массива $_POST
 * @param $name параметр массива $_POST
