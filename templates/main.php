@@ -1,6 +1,7 @@
 <?php
 
 
+
 require_once 'my_functions.php';
 require_once 'variables.php';
 require_once 'helpers.php';
