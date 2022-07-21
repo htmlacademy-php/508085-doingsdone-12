@@ -5,9 +5,9 @@
           <div class="form__row">
             <label class="form__label" for="name">Название <sup>*</sup></label>
 
-            <input type="text" name='name' id='name' value='<?= $name_val ?>' placeholder='Введите название' class='form__input<?php if($_POST["name"] == 'name not field' && $_SERVER['REQUEST_METHOD'] == 'POST') echo ' form__input--error' ?> '>
-               <?php if($_POST["name"] == 'name not field' && $_SERVER['REQUEST_METHOD'] == 'POST'): ?>
-               <p class='form__message'>Поле не заполнено</p> 
+            <input type="text" name='name' id='name' value='<?= $tname ?>' placeholder='Введите название' class='form__input<?php if($_SERVER['REQUEST_METHOD'] == 'POST' && $errors['tname']) echo ' form__input--error' ?> '>
+               <?php if($_SERVER['REQUEST_METHOD'] == 'POST'): ?>
+               <p class='form__message'><?= $errors['tname'] ?></p> 
                <?php endif; ?>
           </div>
 
@@ -25,9 +25,9 @@
           <div class="form__row">
             <label class="form__label" for="date">Дата выполнения</label>
 
-            <input type="text" name="date" id="date" value='<?= $date_val ?>' placeholder="Введите дату в формате ГГГГ-ММ-ДД" class='form__input form__input--date<?php if($_POST["date"] == 'date not field' && $_SERVER['REQUEST_METHOD'] == 'POST') echo ' form__input--error' ?> '>
-              <?php if($_POST["date"] == 'date not field' && $_SERVER['REQUEST_METHOD'] == 'POST'): ?>
-               <p class='form__message'>Поле не заполнено</p> 
+            <input type="text" name="date" id="date" value='<?= $date ?>' placeholder="Введите дату в формате ГГГГ-ММ-ДД" class='form__input form__input--date<?php if($_SERVER['REQUEST_METHOD'] == 'POST' && $errors['date']) echo ' form__input--error' ?> '>
+              <?php if($_SERVER['REQUEST_METHOD'] == 'POST'): ?> 
+               <p class='form__message'><?= $errors['date'] ?></p> 
               <?php endif; ?>
           </div>
 
