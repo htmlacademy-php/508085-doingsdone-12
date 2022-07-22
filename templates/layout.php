@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 
+
 <html lang="ru">
 
 <head>
@@ -17,16 +18,16 @@
     <div class="page-wrapper">
         <div class="container container--with-sidebar">
             <header class="main-header">
-                <a href="/">
+                <a href="/508085-doingsdone-12/">
                     <img src="img/logo.png" width="153" height="42" alt="Логотип Дела в порядке">
                 </a>
 
                 <div class="main-header__side">
-                    <a class="main-header__side-item button button--plus open-modal" href="pages/form-task.html">Добавить задачу</a>
+                    <a class="main-header__side-item button button--plus open-modal" href="add.php">Добавить задачу</a>
 
                     <div class="main-header__side-item user-menu">
                         <div class="user-menu__data">
-                            <p><?= htmlspecialchars($user_name); ?></p>
+                            <p><?= htmlspecialchars($user['name']); ?></p>
 
                             <a href="#">Выйти</a>
                         </div>
@@ -35,16 +36,18 @@
             </header>
 
             <div class="content">
-                <!--php ппеременная с контентом -->
+                <!-- php ппеременная с контентом -->
                 <section class="content__side">
                     <h2 class="content__side-heading">Проекты</h2>
 
                     <nav class="main-navigation">
                         <ul class="main-navigation__list">
-                            <?php foreach ($projects_arr as $one_project): ?>
-                                <li class="main-navigation__list-item<?php if ($_GET['project'] == $one_project['id']) echo ' main-navigation__list-item--active' ?>">
-                                    <a class="main-navigation__list-item-link" href="?project=<?= $one_project['id'] ?>"><?= htmlspecialchars($one_project['project_name']); ?></a>
-                                    <span class="main-navigation__list-item-count"><?= count_tasks2($con, $one_project['id']); ?></span> 
+
+                            <?php foreach ($projects_arr_name_by_tasks as $one_project): ?>
+                                <li class="main-navigation__list-item<?php if ($project_id == $one_project['project_id']) echo ' main-navigation__list-item--active' ?>">
+                                    <a class="main-navigation__list-item-link" href="?project=<?= $one_project['project_id'] ?>"><?= htmlspecialchars($one_project['project_name']); ?></a>
+                                    <span class="main-navigation__list-item-count"><?= count_tasks2($mysqli, $one_project['project_id'], $user['id']); ?></span> 
+
                                 </li>
                             <?php endforeach; ?>
                         </ul>
@@ -52,7 +55,7 @@
 
                     <a class="button button--transparent button--plus content__side-button" href="pages/form-project.html" target="project_add">Добавить проект</a>
                 </section>
-                <?= $main; ?>
+                 <?= $main; ?>
             </div>
         </div>
     </div>

@@ -1,6 +1,14 @@
+<?php
+
+require_once 'variables.php';
+
+?>
+
 <main class="content__main">
-    <h2 class="content__main-heading"><?php if(!$checker_get_params && $_GET['project']) echo 'Ошибка 404, такая страница отсутствует'; 
-                                            else echo 'Список задач' ?></h2>
+
+    <h2 class="content__main-heading">
+    <?php echo ($logic_for_header == 0) ? 'Ошибка 404, такая страница отсутствует' : 'Список задач' ?>
+    </h2>
 
     <form class="search-form" action="index.php" method="post" autocomplete="off">
         <input class="search-form__input" type="text" name="" value="" placeholder="Поиск по задачам">
@@ -36,12 +44,12 @@
                     </label>
                 </td>
 
-                <td class="task__file">
-                    <a class="download-link" href="#"></a>
+                <td class="task__file">                     
+                    <a class="download-link" href="<?php if ($one_task["file_path"]) echo 'uploads/'. $one_task['file_path']; ?>"> </a>
                 </td>
 
                 <td class="task__date"> <?= htmlspecialchars($one_task["dt_deadline"]); ?> </td> 
-                <td class="task__controls">
+                <td class="task__controls"> 
                 </td>
             </tr>
         <?php endforeach; ?>

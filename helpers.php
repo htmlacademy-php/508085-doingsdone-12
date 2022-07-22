@@ -142,3 +142,20 @@ function include_template($name, array $data = []) {
 
     return $result;
 }
+
+
+/////////////////////////////////////////////////////////////////////////////////
+
+// $tasks = "SELECT * FROM task WHERE user_id = $user_id";
+// if (isset($_GET["project"])) {
+  
+    
+//    $project_id = filter_input(INPUT_GET, 'project', FILTER_SANITIZE_NUMBER_INT);
+//    $tasks .= " AND project_id = $project_id";
+// };
+
+
+
+// $tasks_result = mysqli_query($con, $tasks)
+//     or exit('Ошибка получения массива задач'); 
+// $tasks_arr = mysqli_fetch_all($tasks_result, MYSQLI_ASSOC);

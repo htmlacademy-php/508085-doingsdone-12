@@ -1,51 +1,15 @@
 <?php
-require_once 'my_functions.php';
-require_once 'helpers.php';
-// показывать или нет выполненные задачи
-$show_complete_tasks = rand(0, 1);
+require_once 'variables.php';
 
+// массив задач
+$tasks_arr = base_extr($mysqli, 'task', $user['id']);
+// массив проектов с названиями задач
+$projects_arr_name_by_tasks = join_tasks_and_projects($user['id'], $mysqli);  
 
-$user = [
-    'id' => 3,
-    'user_name' => 'Вася',
-];
+$checker_get_param = array_count_values(array_column($tasks_arr, 'project_id'))[$project_id];
+$checker_get_param = $checker_get_param ?: 0;
 
-$user_id = $user['id'];
-
-// подключение
-$con = mysqli_connect("localhost", "root", "mysql", "doinngsdone")
-    or exit("Ошибка подключения: " . mysqli_connect_error());
-mysqli_set_charset($con, 'utf8');
-
-
-
-// получаем массив проектов
-$projects = "SELECT id, project_name, user_id FROM project WHERE user_id = $user_id";
-$projects_result = mysqli_query($con, $projects)
-    or exit('Ошибка получения массива задач');
-$projects_arr = mysqli_fetch_all($projects_result, MYSQLI_ASSOC);
-
-
-
-$scriptname = pathinfo(__FILE__, PATHINFO_BASENAME);
-
-
-// Получаем массив задач, если есть get-параметр, 
-// то модифицируем запрос sql c условием, где project_id = get-параметру
-$tasks = "SELECT * FROM task WHERE user_id = $user_id";
-if (isset($_GET["project"])) {
-  
-    
-   $project_id = filter_input(INPUT_GET, 'project', FILTER_SANITIZE_NUMBER_INT);
-   $tasks .= " AND project_id = $project_id";
-};
-
-
-
-$tasks_result = mysqli_query($con, $tasks)
-    or exit('Ошибка получения массива задач'); 
-$tasks_arr = mysqli_fetch_all($tasks_result, MYSQLI_ASSOC);
-
+$logic_for_header = (!$checker_get_param && $project_id) ? 0 : 1;
 
 $checker_get_params = array_count_values(array_column($tasks_arr, 'project_id'))[$project_id];
 $checker_get_params = !$checker_get_params ? $checker_get_params = 0 : $checker_get_params = $checker_get_params;
@@ -56,8 +20,10 @@ $main = include_template(
     [
         'tasks_arr' => $tasks_arr, 
         'show_complete_tasks' => $show_complete_tasks,
-        'checker_get_params' => $checker_get_params,
 
+        'checker_get_param' => $checker_get_param,
+        'project_id' => $project_id,
+        'logic_for_header' => $logic_for_header,
 
     ]
 );
@@ -66,13 +32,17 @@ $layout = include_template(
     'layout.php',
     [
         'title' => 'Дела в порядке',
-        'user_name' => $user['user_name'],
+        'user' => $user,//['user_name'],
         'main' => $main,
-        'projects_arr' => $projects_arr, 
-        'con' => $con,
-        'scr_name' =>$scriptname,
+
+        'mysqli' => $mysqli,
+        'projects_arr'=> $projects_arr,
+        'project_id' => $project_id,
+        //'user_id' => $user['id'],
+        'projects_arr_name_by_tasks' => $projects_arr_name_by_tasks
+
     ]
 );
 
-
 print($layout);
+

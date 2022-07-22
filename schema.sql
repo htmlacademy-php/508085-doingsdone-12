@@ -25,7 +25,8 @@ CREATE TABLE task (
     task_name VARCHAR(128) NOT NULL COMMENT 'Название задачи',
     status_ready TINYINT DEFAULT 0 COMMENT 'Статус готовности',
     dt_add TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT 'Таймстэмп заведения задачи',
-    dt_deadline VARCHAR(128) COMMENT 'Таймстэмп дедлайна', -- TIMESTAMP
+    dt_deadline VARCHAR(128) COMMENT 'Таймстэмп дедлайна',
+    file_path VARCHAR(128) COMMENT 'Путь файла',
     INDEX (user_id),
     INDEX (project_id)
 );
