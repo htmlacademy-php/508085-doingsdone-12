@@ -4,8 +4,12 @@
 <head>
   <meta charset="UTF-8">
   <title>Document</title>
-  <link rel="stylesheet" href="../css/normalize.css">
-  <link rel="stylesheet" href="../css/style.css">
+  <!-- <link rel="stylesheet" href="../css/normalize.css">
+  <link rel="stylesheet" href="../css/style.css"> -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/flatpickr.min.css">
+  <link rel="stylesheet" href="img/logo.png">
 </head>
 
 <body>
@@ -15,7 +19,7 @@
     <div class="container container--with-sidebar">
       <header class="main-header">
         <a href="#">
-          <img src="../img/logo.png" width="153" height="42" alt="Логитип Дела в порядке">
+          <img src="img/logo.png" width="153" height="42" alt="Логитип Дела в порядке">
         </a>
 
         <div class="main-header__side">
@@ -33,7 +37,7 @@
         <main class="content__main">
           <h2 class="content__main-heading">Регистрация аккаунта</h2>
 
-          <form class="form" action="index.html" method="post" autocomplete="off">
+          <form class="form" action="register.php" method="post" autocomplete="off" enctype="multipart/form-data">
             <div class="form__row">
               <label class="form__label" for="email">E-mail <sup>*</sup></label>
 
@@ -53,7 +57,15 @@
 
               <input class="form__input" type="text" name="name" id="name" value="" placeholder="Введите имя">
             </div>
-            
+
+            <div class="form__input-file">
+              <input class="visually-hidden" type="file" name="file" id="file" value="">
+
+              <label class="button button--transparent" for="file">
+                <span>Выберите файл</span>
+              </label>
+            </div>
+
             <div class="form__row form__row--controls">
               <p class="error-message">Пожалуйста, исправьте ошибки в форме</p>
 

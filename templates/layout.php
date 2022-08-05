@@ -29,7 +29,7 @@
                         <div class="user-menu__data">
                             <p><?= htmlspecialchars($user['name']); ?></p>
 
-                            <a href="#">Выйти</a>
+                            <a href="pages/guest.html">Выйти</a>
                         </div>
                     </div>
                 </div>
