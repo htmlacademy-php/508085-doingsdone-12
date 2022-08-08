@@ -48,34 +48,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt = db_get_prepare_stmt($mysqli, $insert_in_task, [
             $today,
             $passwordHash,
-            $avatar_path, ////////
+            $avatar_path, 
             $name,
             $email
         ]);
-    }
-    // исполняем подготовленное выражение
-    mysqli_stmt_execute($stmt);
 
-    header("Location: /508085-doingsdone-12/"); 
+            // исполняем подготовленное выражение
+        mysqli_stmt_execute($stmt);
 
-
-    // if (password_verify('bad-password', $passwordHash)) {
-    // }
-    // else {
-
-    // };
-
-    // print($passwordHash);
-
-
-    // print($errors['email'] . '<br>');
-    // print($errors['password'] . '<br>');
-    // print($errors['name'] . '<br>');
-
-
-
-} else {
-
+        header("Location: /508085-doingsdone-12/");
+    } 
+ 
+};
 
 $registr = include_template(
     'reg.php',
@@ -86,23 +70,4 @@ $registr = include_template(
         'errors' => $errors
     ]
 );
-
-
-// $layout = include_template(
-//     'layout.php',
-//     [
-//         'title' => 'Регистрация',
-//         'user' => $user['user_name'],
-//         'main' => $registr,
-//         //'mysql' => $mysqli,
-//         //'projects_arr' => $projects_arr,
-//         //'project_id' => $project_id,
-//         'user_id' => $user['id'],
-//     ]
-// );
-
-
-
 print($registr);
-// pages/register.html
-};

@@ -41,21 +41,26 @@
             <div class="form__row">
               <label class="form__label" for="email">E-mail <sup>*</sup></label>
 
-              <input class="form__input form__input--error" type="text" name="email" id="email" value="" placeholder="Введите e-mail">
+              <input class="form__input<?php if($errors['email'] != null && $_SERVER['REQUEST_METHOD'] == 'POST'): echo ' form__input--error' ?>" type="text" name="email" id="email" value="" placeholder="Введите e-mail">
 
-              <p class="form__message">E-mail введён некорректно</p>
+              <?php print("<p class='form__message'>E-mail введён некорректно</p>"); ?>
+              <?php endif; ?>
             </div>
 
             <div class="form__row">
               <label class="form__label" for="password">Пароль <sup>*</sup></label>
 
-              <input class="form__input" type="password" name="password" id="password" value="" placeholder="Введите пароль">
+              <input class="form__input<?php if($errors['password']!= null && $_SERVER['REQUEST_METHOD'] == 'POST'): echo ' form__input--error' ?>" type="password" name="password" id="password" value="" placeholder="Введите пароль">
+              <?php print("<p class='form__message'>Пароль не введен</p>"); ?>
+              <?php endif; ?>
             </div>
 
             <div class="form__row">
               <label class="form__label" for="name">Имя <sup>*</sup></label>
 
-              <input class="form__input" type="text" name="name" id="name" value="" placeholder="Введите имя">
+              <input class="form__input<?php if($errors['password']!= null && $_SERVER['REQUEST_METHOD'] == 'POST'): echo ' form__input--error' ?>" type="text" name="name" id="name" value="" placeholder="Введите имя">
+              <?php print("<p class='form__message'>Имя не введено</p>"); ?>
+              <?php endif; ?>
             </div>
 
             <div class="form__input-file">
@@ -65,10 +70,11 @@
                 <span>Выберите файл</span>
               </label>
             </div>
-
+            <?php if($errors!= null && $_SERVER['REQUEST_METHOD'] == 'POST'):?>
             <div class="form__row form__row--controls">
-              <p class="error-message">Пожалуйста, исправьте ошибки в форме</p>
-
+              <p class='error-message'>Пожалуйста, исправьте ошибки</p>
+             <?php endif; ?>
+            
               <input class="button" type="submit" name="" value="Зарегистрироваться">
             </div>
           </form>
