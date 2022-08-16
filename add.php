@@ -84,7 +84,8 @@ $add_temp = include_template(
         'all_projects_arr' => $all_projects_arr,
         'tname' => $tname,
         'date' => $date,
-        'errors' => $errors
+        'errors' => $errors,
+        'mode_view' => $mode_view['is_register']
     ]
 );
 
